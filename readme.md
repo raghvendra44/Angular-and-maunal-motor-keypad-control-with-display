@@ -5,18 +5,18 @@
 **1. Arduino Uno**
 
 **2. Motor with encoder (model: rmcs-5033)**
-_ - Encoder type : Quad Encoder (Usually all encoders are of this type)
- - Lines on Encoder : 41 (might vary in your case, so do check the datahseet before using it for your project)
- - End shaft Counts per rotation : 8545 counts
- - 300 RPM 12V Rhino High Torque Quad Encoder DC Geared Motor with Metal Planetary Motor, Quad Encoder and Metal Gears
- - 18000 RPM base motor
- - Motor rated Torque is 10 kgcm along with gearbox and stall torque is even higher than 40 kgcm.
- - No-load current : 800 mA, Load current : upto 7.5 A(Max) 
-Reference - https://rhinomc.com/products/dc-servo-encoder-12v-motor/rhino-300rpm-5kgcm-12v-dc-planetary-geared-quad-encoder-servo-motor-rmcs-5033/_
+ - _Encoder type : Quad Encoder (Usually all encoders are of this type)_
+ - _Lines on Encoder : 41 (might vary in your case, so do check the datahseet before using it for your project)_
+ - _End shaft Counts per rotation : 8545 counts_
+ - _300 RPM 12V Rhino High Torque Quad Encoder DC Geared Motor with Metal Planetary Motor, Quad Encoder and Metal Gears_
+ - _18000 RPM base motor_
+ - _Motor rated Torque is 10 kgcm along with gearbox and stall torque is even higher than 40 kgcm._
+ - _No-load current : 800 mA, Load current : upto 7.5 A(Max)_
+Reference - https://rhinomc.com/products/dc-servo-encoder-12v-motor/rhino-300rpm-5kgcm-12v-dc-planetary-geared-quad-encoder-servo-motor-rmcs-5033/
 
 **3. Motor driver (model: rmcs - 2303)**
-_Rhino DC servo driver 10V -30V 50W 5A Compatible with modbus URAT ASCII mainly for encoder DC motors. usually used along with various modes in built with its library arduino library.
-Datasheet : https://robokits.co.in/downloads/RMCS-2303%20updated%20datasheet.pdf_
+_Rhino DC servo driver 10V -30V 50W 5A Compatible with modbus URAT ASCII mainly for encoder DC motors. usually used along with various modes in built with its library arduino library._
+Datasheet : https://robokits.co.in/downloads/RMCS-2303%20updated%20datasheet.pdf
 
 **4. Keypad (4*4)**
 _It is a basic keypad with 16 buttons in total, with 0,9 number keys, A to D keys adn the remaining 2 are * and #._
