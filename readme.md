@@ -51,17 +51,17 @@ It has mainly 4 functions
 
 _Keypad Functions:_
 - Numbers - to enter the angle.
-- * : backspace. used in case of error in entering angle.
+- Asterisk : backspace. used in case of error in entering angle.
 - D : Exit out of the current mode.
-- #(hash) : This sends the angle to the driver.
+- Hash : This sends the angle to the driver.
 
 **C. Manual mode**
 - This function is used to move the motor to and fro using 2 buttons at a particular speed given by the user.
 
 _Keypad Functions:_
-- * : backspace. used in case of error in entering angle.
+- Asterisk : backspace. used in case of error in entering angle.
 - D : Exit out of the current mode.
-- # : This sends the angle to the driver.
+- Hash : This sends the angle to the driver.
 - C : moves the motor in Clockwise direction.
 - A : moves the motor in Anit-Clockwise direction.
 - B : to apply breaks on the motor.
