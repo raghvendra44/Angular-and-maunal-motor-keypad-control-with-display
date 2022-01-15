@@ -1,4 +1,4 @@
-# **This is a basic motor control project using a arduino code with keypad control and a lcd 16*2 display for visualising the output**
+# **This is a basic motor control project using an arduino code with keypad control and a lcd 16*2 display for visualising the output**
 
 ## Components Details:
 
