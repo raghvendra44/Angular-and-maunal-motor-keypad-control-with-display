@@ -27,6 +27,7 @@ Datasheet : https://robokits.co.in/downloads/RMCS-2303%20updated%20datasheet.pdf
 - _This is a LCD display which is coupled with an I2C for interfacing and simplicity._
 
 **7. Power source 12V ( to power the driver and motor)**
+
 **8. Jumper cable**
 
 ## **Circuit diagram**
