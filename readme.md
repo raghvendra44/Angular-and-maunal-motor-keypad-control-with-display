@@ -36,6 +36,7 @@ Datasheet : https://robokits.co.in/downloads/RMCS-2303%20updated%20datasheet.pdf
 ![Motor_2_Uno](https://github.com/raghvendra44/Angular-and-maunal-motor-keypad-control-with-display/blob/main/circuit_1.PNG?raw=true)
 
 **2. Keypad and Lcd connected to Arduino Uno**
+ ### - Small change: The image shows the keypad is connected from 9 to 2, but in the code, the keypad is connected from 13 to 6 (Note the change)
 ![Keypad_LCD_2_Uno](https://github.com/raghvendra44/Angular-and-maunal-motor-keypad-control-with-display/blob/main/circuit_2.PNG?raw=true)
  
 ## **Information about the code and keypad function for each mode**
