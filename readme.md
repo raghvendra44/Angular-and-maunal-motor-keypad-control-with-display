@@ -42,25 +42,28 @@ Datasheet : https://robokits.co.in/downloads/RMCS-2303%20updated%20datasheet.pdf
 
 It has mainly 4 functions
 **A. Home position**
-This Function moves the motor to the 0th position.
+- This Function moves the motor to the 0th position.
+
 **B. Angular mode**
-This functions take the angle in degrees from the keypad and then moves to that position. The position is relative to the actual 0 of the motor.
+- This functions take the angle in degrees from the keypad and then moves to that position. The position is relative to the actual 0 of the motor.
+
 _Keypad Functions:_
-Numbers - to enter the angle.
-* - backspace. used in case of error in entering angle.
-D - Exit out of the current mode.
-#(hash) - This sends the angle to the driver.
+- Numbers - to enter the angle.
+- * : backspace. used in case of error in entering angle.
+- D : Exit out of the current mode.
+- #(hash) : This sends the angle to the driver.
 
 **C. Manual mode**
-This function is used to move the motor to and fro using 2 buttons at a particular speed given by the user.
+- This function is used to move the motor to and fro using 2 buttons at a particular speed given by the user.
+
 _Keypad Functions:_
-* - backspace. used in case of error in entering angle.
-D - Exit out of the current mode and to also submit speed entered.
-#(hash) - This sends the angle to the driver.
-C - moves the motor in Clockwise direction.
-A - moves the motor in Anit-Clockwise direction.
-B - to apply breaks on the motor
+- * : backspace. used in case of error in entering angle.
+- D : Exit out of the current mode.
+- # : This sends the angle to the driver.
+- C : moves the motor in Clockwise direction.
+- A : moves the motor in Anit-Clockwise direction.
+- B : to apply breaks on the motor.
 
 **D. Reset**
-This basically resets the whole code, to overcome any malfunctioning 
+- This basically resets the whole code, to overcome any malfunctioning 
  
