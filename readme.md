@@ -12,10 +12,12 @@
  - _18000 RPM base motor_
  - _Motor rated Torque is 10 kgcm along with gearbox and stall torque is even higher than 40 kgcm._
  - _No-load current : 800 mA, Load current : upto 7.5 A(Max)_
+
 Reference - https://rhinomc.com/products/dc-servo-encoder-12v-motor/rhino-300rpm-5kgcm-12v-dc-planetary-geared-quad-encoder-servo-motor-rmcs-5033/
 
 **3. Motor driver (model: rmcs - 2303)**
 _Rhino DC servo driver 10V -30V 50W 5A Compatible with modbus URAT ASCII mainly for encoder DC motors. usually used along with various modes in built with its library arduino library._
+
 Datasheet : https://robokits.co.in/downloads/RMCS-2303%20updated%20datasheet.pdf
 
 **4. Keypad (4*4)**
