@@ -16,15 +16,15 @@
 Reference - https://rhinomc.com/products/dc-servo-encoder-12v-motor/rhino-300rpm-5kgcm-12v-dc-planetary-geared-quad-encoder-servo-motor-rmcs-5033/
 
 **3. Motor driver (model: rmcs - 2303)**
-_Rhino DC servo driver 10V -30V 50W 5A Compatible with modbus URAT ASCII mainly for encoder DC motors. usually used along with various modes in built with its library arduino library._
+- _Rhino DC servo driver 10V -30V 50W 5A Compatible with modbus URAT ASCII mainly for encoder DC motors. usually used along with various modes in built with its library arduino library._
 
 Datasheet : https://robokits.co.in/downloads/RMCS-2303%20updated%20datasheet.pdf
 
 **4. Keypad (4*4)**
-_It is a basic keypad with 16 buttons in total, with 0,9 number keys, A to D keys adn the remaining 2 are * and #._
+- _It is a basic keypad with 16 buttons in total, with 0,9 number keys, A to D keys adn the remaining 2 are * and #._
 
 **5. LCD I2C display (16*2)**
-_This is a LCD display which is coupled with an I2C for interfacing and simplicity._
+- _This is a LCD display which is coupled with an I2C for interfacing and simplicity._
 
 **7. Power source 12V ( to power the driver and motor)**
 **8. Jumper cable**
