@@ -27,7 +27,8 @@ This is a LCD display which is coupled with an I2C for interfacing and simplicit
 8. Jumper cable
 
 Circuit diagram
-
+1. Motor - > driver -> Arduino Uno              
+![alt text](https://github.com/raghvendra44/Angular-and-maunal-motor-keypad-control-with-display/blob/circuit_1.PNG?raw=true)
 
 
 
