@@ -28,7 +28,7 @@ _This is a LCD display which is coupled with an I2C for interfacing and simplici
 
 Circuit diagram
              
-![1. Motor - > driver -> Arduino Uno](https://github.com/raghvendra44/Angular-and-maunal-motor-keypad-control-with-display/blob/circuit_1.PNG?raw=true)
+![1. Motor - > driver -> Arduino Uno](https://github.com/raghvendra44/Angular-and-maunal-motor-keypad-control-with-display/blob/main/circuit_1.PNG?raw=true)
 
 
 
