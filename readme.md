@@ -41,6 +41,7 @@ Datasheet : https://robokits.co.in/downloads/RMCS-2303%20updated%20datasheet.pdf
 ## **Information about the code and keypad function for each mode**
 
 It has mainly 4 functions
+
 **A. Home position**
 - This Function moves the motor to the 0th position.
 
