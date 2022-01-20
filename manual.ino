@@ -1,12 +1,14 @@
-void manual_mode()
+byte manual_mode()
 {
-  lcd.clear();lcd.setCursor(0, 0);lcd.print("MANUAL");
-  lcd.setCursor(0, 1);lcd.print("Enter SPEED:");
-  char num = customKeypad.getKey();
-  
-  String sp = "";
+  lcd.clear();lcd.setCursor(6, 0);lcd.print("RPM Range");
+  lcd.setCursor(1, 1);lcd.print("2 ~ 300");
+  delay(2500);
+  lcd.clear();lcd.setCursor(0, 0);lcd.print("MAN");
 
-  while(true)
+  lcd.setCursor(0, 1);lcd.print("Enter SPEED:    ");
+  char num = customKeypad.getKey();  
+  String sp = "";
+  while(fin == 1)
   {
     num = customKeypad.getKey();
     while(!num){num = customKeypad.getKey();}  
@@ -15,80 +17,57 @@ void manual_mode()
     num == '6' || num == '7' || num == '8' || num == '9' || num == '0')  
     // enter speeed
     {
-      sp = "";
-      lcd.setCursor(0, 1);lcd.print("Enter SPEED:");
       sp = enter_num(sp,num);
       lcd.setCursor(12, 1);lcd.print(sp);
       Serial.print(num);
-      char number = customKeypad.getKey();
-      while(true)
-        {
-          number = customKeypad.getKey();
-          while(!number){number = customKeypad.getKey();}
-          if(number == '1' || number == '2' || number == '3' || number == '4' || number == '5' || 
-          number == '6' || number == '7' || number == '8' || number == '9' || number == '0')
-          {
-            sp = enter_num(sp,number);
-            lcd.setCursor(12, 1);lcd.print(sp);
-            Serial.print(number);
-          }
-          else if(number == '*')                               //Backspace function
-          {
-            sp = backspace(sp);
-            lcd.setCursor(12, 1);lcd.print(" ");lcd.setCursor(13, 1);lcd.print(" ");lcd.setCursor(14, 1);lcd.print(" ");lcd.setCursor(15, 1);lcd.print(" ");  
-            lcd.setCursor(12, 1);lcd.print(sp);
-            Serial.println();
-            Serial.print(sp);
-          }
-          else if(number == 'D'){break;}
-        }
     }
         
-    else if(num == '#','A','C' && num != 'D')
+    else if(num == '#' && num != 'D')
     {
       rmcs.Speed(slave_id,sp.toInt());                   //Set speed within range of 0-65535 or 0-(maximum speed of base motor)
-      lcd.clear();lcd.setCursor(0, 0);lcd.print(F("MAN"));
-      lcd.setCursor(4, 0);lcd.print(F("C:CW"));
-      lcd.setCursor(10, 0);lcd.print(F("A:ACW"));
-      
-      long int Current_position = rmcs.Position_Feedback(slave_id);
-      if(num == 'C')                            // Clockwise function
+      //lcd.clear();lcd.setCursor(0, 0);lcd.print(F("MAN"));
+      lcd.clear();lcd.setCursor(2, 0);lcd.print(F("2: Inc speed"));
+      lcd.setCursor(2, 1);lcd.print(F("8: Dec speed"));
+      delay(2000);
+      lcd.clear();lcd.setCursor(2, 0);lcd.print(F("4: Move CW"));
+      lcd.setCursor(2, 1);lcd.print(F("6: Move CCW"));
+      delay(2000);
+      lcd.clear();lcd.setCursor(2, 0);lcd.print(F("5: Apply break"));
+      lcd.setCursor(2, 1);lcd.print(F("D: Add new spd"));
+      delay(2000);
+      fin = manual_keypad(sp.toInt()*60);
+      sp = "";
+      if(fin == 1)
       {
-        Serial.println(F("CW"));
-        rmcs.Enable_Digital_Mode(slave_id,0);        //To enable motor in digital speed control mode. 0-fwd,1-reverse direction. 
-        lcd.setCursor(0, 1);lcd.print(F("Speed:"));
-        lcd.setCursor(7, 1);lcd.print(sp);
-        delay(500);
-        rmcs.Brake_Motor(slave_id,0);
+        lcd.clear();lcd.setCursor(0, 0);lcd.print("MAN");
+        lcd.setCursor(1, 1);lcd.print("RPM: 2.5 -> 300");
+        delay(2500);
+        lcd.setCursor(0, 1);lcd.print("Enter SPEED:    ");
       }
-      
-      else if(num == 'A')                            // Anti - Clockwise function
-      {
-        Serial.println(F("ACW"));
-          
-        rmcs.Enable_Digital_Mode(slave_id,1);        //To enable motor in digital speed control mode. 0-fwd,1-reverse direction. 
-        lcd.setCursor(0, 1);lcd.print(F("Speed:"));
-        lcd.setCursor(7, 1);lcd.print("-"+sp);
-        delay(500);
-        rmcs.Brake_Motor(slave_id,0);
-      }
+      else{rmcs.Brake_Motor(slave_id,0);}
     }
-      
-    else if(num == 'B')                            // Apply breaks to motor function
+
+    else if(num == '*')                               //Backspace function
     {
-      Serial.println(F("Break"));
-      rmcs.Brake_Motor(slave_id,0);
+      sp = backspace(sp);
+      lcd.setCursor(12, 1);lcd.print(" ");lcd.setCursor(13, 1);lcd.print(" ");lcd.setCursor(14, 1);lcd.print(" ");lcd.setCursor(15, 1);lcd.print(" ");  
+      lcd.setCursor(12, 1);lcd.print(sp);
+      Serial.println();
+      Serial.print(sp);
     }
     
-    else                            // Exit function
+    else if(num == 'D')                            // Exit function
     {
-      rmcs.Brake_Motor(slave_id,0);
-      lcd.clear();lcd.setCursor(0, 0);lcd.print("MANUAL CONTROL");
-      lcd.setCursor(4, 1);lcd.print("ENDED");
-      delay(1000);
       speed=400;
       lcd.clear();
+      rmcs.Brake_Motor(slave_id,0);
       break;
     }
+    else if(num == 'B'){angl_call();}
+    else if(num == 'A'){home_posn_call();}
   }
+  lcd.clear();lcd.setCursor(0, 0);lcd.print("MANUAL CONTROL");
+  lcd.setCursor(4, 1);lcd.print("ENDED");
+  delay(1000);
+  return 0;
 }
