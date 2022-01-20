@@ -67,13 +67,9 @@ _Keypad Functions:_
 
 **Working:**
 
-- First, enter the RPM(speed) of your shaft, then press *hash* to submit your value, and if you make an error in entering u can press *asterisk* (before pressing hash).
-(Note : Since my motor has 41 lines per rotation, so approximately 23.74 pulses is rquired for the shaft to give by 1 degree. and 8545 pulses is required to move the shaft 360 degrees. This might vary in your case)
-
+- First, enter the RPM(speed) of your shaft, then press *hash* to submit your value, and if you make an error in entering u can press *asterisk* (before pressing hash). (Note : Since my motor has 41 lines per rotation, so approximately 23.74 pulses is rquired for the shaft to give by 1 degree. and 8545 pulses is required to move the shaft 360 degrees. This might vary in your case)
 - then you enter the angle you required the shaft to move, then press *hash* to submit your value, and if you make an error in entering u can press *asterisk* (before pressing hash).
-
 - Now you will be displayed your entered values. On pressing *Hash* at this stage would start the motor. (If you are willing to change the values, press *Asterisk*, acts as back button), this would take you at the start position where you restart the process of entering values for speed and angle.)
-
 - After the motor reaches the angle given, it displays prev ( that is basically the position in which it is) and the speed that was given.
 - At this step, if you press *B* , it will rotate the same distance again ( incremental). 
 - Or if you wish to change the speed value by a small fraction, then you may press *2* or *8* to increase/decrease the speed by 5%.
