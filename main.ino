@@ -32,10 +32,10 @@ int PP_gain=32;
 int PI_gain=16;
 int VF_gain=32;
 int LPR=41;
-int acceleration=600;
+int acceleration=2000;
 int speed=400;
 long int Current_Speed;
-
+byte fin = 1;
 void setup()
 {
   lcd.backlight();
@@ -45,30 +45,93 @@ void setup()
   rmcs.Serial0(9600);
   rmcs.begin(&myserial,9600);
 
-  lcd.setCursor(0,0);lcd.print(F("INITIALISING."));
+  lcd.clear();lcd.setCursor(0,0);lcd.print(F("INITIALISING."));
   delay(350);
   lcd.setCursor(0,0);lcd.print(F("INITIALISING.."));
   delay(350);
+  rmcs.Restart(slave_id);
   lcd.setCursor(0,0);lcd.print(F("INITIALISING..."));
   delay(350);
+  while(rmcs.WRITE_PARAMETER(slave_id,INP_CONTROL_MODE,PP_gain,PI_gain,VF_gain,LPR,acceleration,speed)!=1)
+  {
+    lcd.clear();lcd.setCursor(0,0);lcd.print(F("!"));delay(250);
+    lcd.clear();lcd.setCursor(0,0);lcd.print(F("R!"));delay(250);
+    lcd.clear();lcd.setCursor(0,0);lcd.print(F("OR!"));delay(250);
+    lcd.clear();lcd.setCursor(0,0);lcd.print(F("ROR!"));delay(250);
+    lcd.clear();lcd.setCursor(0,0);lcd.print(F("RROR!"));delay(250);
+    for(int i=0;i<16;i++)
+    {
+    lcd.clear();lcd.setCursor(i,0);lcd.print(F("ERROR!"));delay(250);
+    if((rmcs.WRITE_PARAMETER(slave_id,INP_CONTROL_MODE,PP_gain,PI_gain,VF_gain,LPR,acceleration,speed)==1)){break;}
+    }
+  }
   
-  rmcs.WRITE_PARAMETER(slave_id,INP_CONTROL_MODE,PP_gain,PI_gain,VF_gain,LPR,acceleration,speed);
-
   lcd.clear();lcd.setCursor(0,0);lcd.print(F("INITIALISED!"));
   delay(350);
   lcd.clear();lcd.setCursor(0,0);lcd.print(F("INITIALISED!!"));
   delay(350);
 
-  lcd.clear();lcd.setCursor(0,0);lcd.print("A.Home posn");
-  lcd.setCursor(0,1);lcd.print("B.Angular");
-  lcd.setCursor(15,1);lcd.print("#");
+  lcd.clear();lcd.setCursor(0,0);lcd.print(F("A.Home posn"));
+  lcd.setCursor(0,1);lcd.print(F("B.Angular"));
+  lcd.setCursor(15,1);lcd.print(F("#"));
 }
 
 void(* reset) (void) = 0;
 
 char state = 'a';
+
+byte home_posn_call()
+{
+  Serial.println(F("Home posn"));
+  lcd.clear();lcd.setCursor(0,0);lcd.print(F("Home posn"));
+  fin = home_posn();
+  lcd.clear();lcd.setCursor(0,0);lcd.print(F("A.Home posn"));lcd.setCursor(0,1);lcd.print(F("B.Angular"));lcd.setCursor(15,1);lcd.print(F("#"));state='a';
+  return fin;
+}
+
+byte angl_call()
+{
+  Serial.println(F("Angular Control"));
+  lcd.clear();
+  lcd.setCursor(0,0); 
+  lcd.print(F("Angular Control"));
+  lcd.setCursor(2,1);lcd.print(F("- ( ANGL )"));
+  delay(800);
+  lcd.clear();lcd.setCursor(0, 1);lcd.print(F(" 2.5 ~ 300"));
+  lcd.setCursor(2,0);lcd.print(F(" RPM RANGE "));
+  delay(2000);
+  fin = angular_mode();
+  lcd.clear();lcd.setCursor(0,0);lcd.print(F("A.Home posn"));lcd.setCursor(0,1);lcd.print(F("B.Angular"));lcd.setCursor(15,1);lcd.print(F("#"));state='a';
+  return fin;
+}
+
+byte man_call()
+{
+  Serial.println(F("Manual Control mode"));
+  lcd.clear();lcd.setCursor(0,0);lcd.print(F("Manual Control"));
+  lcd.setCursor(2,1);lcd.print(F("- ( MAN )"));
+  delay(2000);
+  fin = manual_mode();
+  Serial.println(F("Ended"));
+  lcd.clear();lcd.setCursor(0,0);lcd.print(F("A.Home posn"));lcd.setCursor(0,1);lcd.print(F("B.Angular"));lcd.setCursor(15,1);lcd.print(F("#"));state='a';
+  return fin;
+}
+
+void reset_call()
+{
+  lcd.clear();lcd.setCursor(0,0);lcd.print(F("Restarting."));
+  delay(250);
+  lcd.clear();lcd.setCursor(0,0);lcd.print(F("Restarting.."));
+  rmcs.ESTOP(slave_id);
+  delay(350);
+  lcd.clear();lcd.setCursor(0,0);lcd.print(F("Restarting..."));
+  delay(350);
+  reset();
+}
+
 void loop()
 {
+  //rmcs.SET_HOME(slave_id);
   Serial.println(F("\n\nCommand options : "));
   Serial.println(F("A.Home"));
   Serial.println(F("B.Angular"));
@@ -78,51 +141,16 @@ void loop()
   
   if(customKey == '#')
   {
-    if(state == 'a'){lcd.clear();lcd.setCursor(0,0);lcd.print("C.Manual");lcd.setCursor(0,1);lcd.print("D.Reset");lcd.setCursor(15,0);lcd.print("#");state='b';}
+    if(state == 'a'){lcd.clear();lcd.setCursor(0,0);lcd.print(F("C.Manual"));lcd.setCursor(0,1);lcd.print(F("D.Reset"));lcd.setCursor(15,0);lcd.print(F("#"));state='b';}
     else{lcd.clear();lcd.setCursor(0,0);lcd.print(F("A.Home posn"));lcd.setCursor(0,1);lcd.print(F("B.Angular"));lcd.setCursor(15,1);lcd.print(F("#"));state='a';}
   }  
 
-  if (customKey == 'B')
-  {
-    Serial.println(F("Angular Control"));
-    lcd.clear();
-    lcd.setCursor(0,0); 
-    lcd.print("Angular Control");
-    lcd.setCursor(2,1);lcd.print("- ( ANGL )");
-    delay(2000);
-    angular_mode();
-    lcd.clear();lcd.setCursor(0,0);lcd.print(F("A.Home posn"));lcd.setCursor(0,1);lcd.print(F("B.Angular"));lcd.setCursor(15,1);lcd.print(F("#"));state='a';
-  }
+  if(customKey == 'A'){home_posn_call();}
 
-  if(customKey == 'A')
-  {
-    Serial.println(F("Home posn"));
-    lcd.clear();lcd.setCursor(0,0);lcd.print(F("Home posn"));
-    home_posn();
-    lcd.clear();lcd.setCursor(0,0);lcd.print(F("A.Home posn"));lcd.setCursor(0,1);lcd.print(F("B.Angular"));lcd.setCursor(15,1);lcd.print(F("#"));state='a';
-  }
+  if (customKey == 'B'){angl_call();}
 
-  if (customKey == 'C')
-  {
-    Serial.println(F("Manual Control mode"));
-    Serial.println(F("* - Clockwise\n# - Counter Clockwise"));
-    lcd.clear();lcd.setCursor(0,0);lcd.print(F("Manual Control"));
-    lcd.setCursor(2,1);lcd.print(F("- ( MAN )"));
-    delay(2000);
-    manual_mode();
-    Serial.println(F("Ended"));
-    lcd.clear();lcd.setCursor(0,0);lcd.print(F("A.Home posn"));lcd.setCursor(0,1);lcd.print(F("B.Angular"));lcd.setCursor(15,1);lcd.print(F("#"));state='a';
-  }
+  if (customKey == 'C'){man_call();}
 
-  if (customKey == 'D')
-  {
-    lcd.clear();lcd.setCursor(0,0);lcd.print(F("Restarting."));
-    delay(250);
-    lcd.clear();lcd.setCursor(0,0);lcd.print(F("Restarting.."));
-    rmcs.ESTOP(slave_id);
-    delay(350);
-    lcd.clear();lcd.setCursor(0,0);lcd.print(F("Restarting..."));
-    delay(350);
-    reset();
-  }
+  if (customKey == 'D'){reset_call();}
+  fin = 1;
 }
